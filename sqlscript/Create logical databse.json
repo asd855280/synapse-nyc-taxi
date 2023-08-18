@@ -1,0 +1,20 @@
+{
+	"name": "Create logical databse",
+	"properties": {
+		"folder": {
+			"name": "Demo"
+		},
+		"content": {
+			"query": "CREATE DATABASE DataExplorationDB\nCOLLATE Latin1_General_100_BIN2_UTF8;\n\nUSE DataExplorationDB;\n\nCREATE EXTERNAL DATA SOURCE synapsecoursekcdl\nWITH ( LOCATION = 'https://synapsecoursekcdl.dfs.core.windows.net');\n\n\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n            BULK '/demo/NYCTripSmall.parquet',\n            DATA_SOURCE = 'synapsecoursekcdl',\n            FORMAT='PARQUET'\n    ) AS [result];",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "DataExplorationDB",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
